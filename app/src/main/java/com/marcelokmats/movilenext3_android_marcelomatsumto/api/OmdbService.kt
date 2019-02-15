@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface OmdbService {
-    @GET("?type=movie")
+    @GET("?apikey=")
     fun searchMovie(
         @Query("s") movieName: String
     ) : Call<MovieSearchResult>

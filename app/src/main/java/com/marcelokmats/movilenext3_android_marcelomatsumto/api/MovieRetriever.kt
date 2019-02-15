@@ -7,7 +7,7 @@ class MovieRetriever {
     private val service: OmdbService
 
     companion object {
-        const val BASE_URL = "http://www.omdbapi.com/apikey="
+        const val BASE_URL = "http://www.omdbapi.com/"
     }
 
     init {
@@ -20,5 +20,5 @@ class MovieRetriever {
     }
 
     fun getMoviesSearchResult(query: String) : RetrofitLiveData<MovieSearchResult> =
-        RetrofitLiveData(service.searchMovie("s=$query"))
+        RetrofitLiveData(service.searchMovie(query))
 }

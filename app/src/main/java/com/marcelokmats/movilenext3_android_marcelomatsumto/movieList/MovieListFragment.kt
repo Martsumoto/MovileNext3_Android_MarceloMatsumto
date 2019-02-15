@@ -57,19 +57,21 @@ class MovieListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        mMovieViewModel.getRepositoriesLiveData().observe(this, Observer { loadMovieList(it.movies) } )
+        mMovieViewModel.getRepositoriesLiveData().observe(this, Observer { loadMovieList(it?.movies) } )
     }
 
-    private fun loadMovieList(movies: List<Movie>) {
-        recyclerView.adapter = MovieListAdapter(
-            movies,
-            this.context!! // TODO
-        ) {
-            //longToast("${it.title} ...")
+    private fun loadMovieList(movies: List<Movie>?) {
+        movies?.let {movies ->
+            recyclerView.adapter = MovieListAdapter(
+                movies,
+                this.context!! // TODO
+            ) {
+                //longToast("${it.title} ...")
 
-            //repositoryRetriever.getLanguageRepositories(
+                //repositoryRetriever.getLanguageRepositories(
                 //callback,
                 //it.title)
+            }
         }
 
         val layoutManager = LinearLayoutManager(this.context)
