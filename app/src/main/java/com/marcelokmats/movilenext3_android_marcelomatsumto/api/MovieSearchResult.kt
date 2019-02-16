@@ -8,7 +8,7 @@ data class MovieSearchResult(
 )
 
 data class Movie(
-    val title: String?,
-    val year: Int?,
-    val posterUrl: String?,
+    val Title: String?,
+    val Year: String?,
+    val Poster: String?,
     val imdbId: String?)

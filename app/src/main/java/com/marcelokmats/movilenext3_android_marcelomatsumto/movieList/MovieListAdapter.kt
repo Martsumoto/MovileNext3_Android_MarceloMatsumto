@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.fragment_movielist_item.view.*
 /**
  * [RecyclerView.Adapter] that can display a [MovieList] and makes a call to the
  * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
  */
 class MovieListAdapter(
     private val mValues: List<Movie>,
@@ -42,11 +41,11 @@ class MovieListAdapter(
             item: Movie,
             listener: (Movie) -> Unit) = with(itemView) {
             Glide.with(mContext)
-                .load(item.posterUrl)
+                .load(item.Poster)
                 .into(ivMovieCover)
 
-            tvTitle.text = item.title ?: ""
-            tvYear.text = item.year?.toString() ?: ""
+            tvTitle.text = item.Title ?: ""
+            tvYear.text = item.Year ?: ""
 
             setOnClickListener { listener(item) }
         }

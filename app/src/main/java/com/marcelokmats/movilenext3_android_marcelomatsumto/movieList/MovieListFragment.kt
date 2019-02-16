@@ -13,6 +13,7 @@ import com.marcelokmats.movilenext3_android_marcelomatsumto.MovieViewModel
 import com.marcelokmats.movilenext3_android_marcelomatsumto.R
 import com.marcelokmats.movilenext3_android_marcelomatsumto.api.Movie
 import kotlinx.android.synthetic.main.fragment_movie_list.*
+import org.jetbrains.anko.longToast
 
 /**
  * A fragment representing a list of Items.
@@ -66,11 +67,10 @@ class MovieListFragment : Fragment() {
                 movies,
                 this.context!! // TODO
             ) {
-                //longToast("${it.title} ...")
+                this.context?.longToast("${it.Title} ...")
 
-                //repositoryRetriever.getLanguageRepositories(
-                //callback,
-                //it.title)
+//                mMovieViewModel.
+
             }
         }
 
