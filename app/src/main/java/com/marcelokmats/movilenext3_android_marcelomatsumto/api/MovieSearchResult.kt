@@ -16,7 +16,8 @@ data class Movie(
     val imdbID: String,
     val Title: String?,
     val Year: String?,
-    val Poster: String?)
+    val Poster: String?,
+    val IsFavorite: Boolean)
 
 @Entity
 data class MovieTicket(

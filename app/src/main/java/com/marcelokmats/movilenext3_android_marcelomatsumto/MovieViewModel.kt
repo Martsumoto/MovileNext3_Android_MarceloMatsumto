@@ -1,14 +1,12 @@
 package com.marcelokmats.movilenext3_android_marcelomatsumto
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.*
 import com.marcelokmats.movilenext3_android_marcelomatsumto.api.Movie
 import com.marcelokmats.movilenext3_android_marcelomatsumto.api.MovieRetriever
 import com.marcelokmats.movilenext3_android_marcelomatsumto.api.MovieSearchResult
 import com.marcelokmats.movilenext3_android_marcelomatsumto.repository.MovieRepository
+import com.marcelokmats.movilenext3_android_marcelomatsumto.util.observeOnce
 
 class MovieViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -19,12 +17,17 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
     val favoriteListLive : MutableLiveData<MutableList<Movie>> = MutableLiveData()
     val favoriteMap : MutableMap<String, Movie> = HashMap()
 
+    //val moviesFavoritesPairLive : LiveData<Pair<MovieSearchResult, MutableList<Movie>>>
+
     private val repository = MovieRepository(application)
 
     init {
+        repository.favoritedMovies.observeOnce(Observer { loadFavorites(it) })
         movieSearchResultLive = Transformations.switchMap(searchTextList) {
             searchText -> movieRetriever.getMoviesSearchResult(searchText)
         }
+
+        //moviesFavoritesPairLive = zipLiveData(movieSearchResultLive, favoriteListLive)
     }
 
     fun setSearchTextView(query: String) {
@@ -53,7 +56,7 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
             }
             movieList.add(movie)
             favoriteListLive.value = movieList
-            favoriteMap.put(movie.imdbID, movie)
+            favoriteMap[movie.imdbID] = movie
         }
     }
 
@@ -71,4 +74,13 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
             favoriteListLive.value = movieList
         }
     }
+
+    private fun loadFavorites(favorites: List<Movie>) {
+        favoriteListLive.value = favorites.toMutableList()
+
+        for (movie in favorites) {
+            favoriteMap[movie.imdbID] = movie
+        }
+    }
+
 }
