@@ -46,6 +46,7 @@ class MovieListAdapter(
 
             tvTitle.text = item.Title ?: ""
             tvYear.text = item.Year ?: ""
+            icFavorite.setActive(item.isFavorite)
             icFavorite.setOnFavoriteStateChangedListener{ favoriteListener(item, icFavorite.isActive) }
 
             setOnClickListener { listener(item) }

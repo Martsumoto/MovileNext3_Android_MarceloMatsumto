@@ -23,11 +23,12 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         repository.favoritedMovies.observeOnce(Observer { loadFavorites(it) })
-        movieSearchResultLive = Transformations.switchMap(searchTextList) {
-            searchText -> movieRetriever.getMoviesSearchResult(searchText)
-        }
 
-        //moviesFavoritesPairLive = zipLiveData(movieSearchResultLive, favoriteListLive)
+        movieSearchResultLive = Transformations.switchMap(searchTextList)
+        { searchText -> movieRetriever.getMoviesSearchResult(searchText) }
+        movieSearchResultLive.observeForever {
+            setFavoritesInMovies(it.movies)
+        }
     }
 
     fun setSearchTextView(query: String) {
@@ -54,6 +55,7 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
             } else {
                 favoriteListLive.value!!
             }
+            movie.isFavorite = true
             movieList.add(movie)
             favoriteListLive.value = movieList
             favoriteMap[movie.imdbID] = movie
@@ -70,6 +72,7 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
             } else {
                 favoriteListLive.value!!
             }
+            movie.isFavorite = false
             movieList.remove(movie)
             favoriteListLive.value = movieList
         }
@@ -79,8 +82,22 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
         favoriteListLive.value = favorites.toMutableList()
 
         for (movie in favorites) {
+            movie.isFavorite = true
             favoriteMap[movie.imdbID] = movie
+        }
+
+        if (favoriteMap.isNotEmpty()) {
+            for (movie in favorites) {
+                movie.isFavorite = true
+            }
         }
     }
 
+    private fun setFavoritesInMovies(movies: List<Movie>) {
+        if (favoriteMap.isNotEmpty()) {
+            for (movie in movies) {
+                movie.isFavorite = favoriteMap.containsKey(movie.imdbID)
+            }
+        }
+    }
 }

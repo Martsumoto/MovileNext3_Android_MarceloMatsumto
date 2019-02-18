@@ -16,6 +16,7 @@ class FavoriteIcon : AppCompatImageView, View.OnClickListener {
     var isActive = false
         private set
 
+
     private var mOnFavoriteStateChanged : (() -> Unit)? = null
 
     constructor(context: Context) : super(context) {
@@ -47,11 +48,10 @@ class FavoriteIcon : AppCompatImageView, View.OnClickListener {
         this.mOnFavoriteStateChanged?.invoke()
     }
 
-    fun setActive(isActive: Boolean) {
-        val drawable: Drawable?
-        this.isActive = isActive
+    fun setActive(active: Boolean) {
+        this.isActive = active
 
-        drawable = if (isActive) {
+        val drawable: Drawable? = if (active) {
             ContextCompat.getDrawable(context, R.drawable.ic_heart_filled)
         } else {
             ContextCompat.getDrawable(context, R.drawable.ic_heart_empty)
