@@ -22,4 +22,7 @@ class MovieRetriever {
 
     fun getMoviesSearchResult(query: String) : RetrofitLiveData<MovieSearchResult> =
         RetrofitLiveData(service.searchMovie(query))
+
+    fun getMovieDetail(imdbID: String) : RetrofitLiveData<MovieDetail> =
+        RetrofitLiveData(service.getMovieDetail(imdbID))
 }

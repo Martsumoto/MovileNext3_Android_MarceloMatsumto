@@ -10,4 +10,8 @@ interface OmdbService {
         @Query("s") movieName: String
     ) : Call<MovieSearchResult>
 
+    @GET("?apikey=21cf54f8&type=movie")
+    fun getMovieDetail(
+        @Query("i") imdbID: String
+    ) : Call<MovieDetail>
 }

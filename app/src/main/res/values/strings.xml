@@ -3,4 +3,13 @@
     <string name="action_settings">Settings</string>
     <string name="bottom_navigation_movies">Filmes</string>
     <string name="bottom_navigation_favorites">Favoritos</string>
+
+    <string name="movie_year">Year:</string>
+    <string name="movie_genre">Genre:</string>
+    <string name="movie_runtime">Runtime:</string>
+    <string name="movie_director">Director:</string>
+    <string name="movie_writer">Writer:</string>
+    <string name="movie_plot">Plot:</string>
+    <string name="error_api_connection_error">Connection error</string>
+    <string name="error_api_no_result">No movie found</string>
 </resources>

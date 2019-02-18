@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/default_margin">
+    <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    <LinearLayout
+            android:id="@+id/layoutContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            android:orientation="vertical">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+            <TextView
+                    android:text="@string/movie_year"
+                    style="@style/MovieLabel"/>
+            <TextView
+                    android:id="@+id/txtYear"
+                    style="@style/MovieInfo"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+            <TextView
+                    android:text="@string/movie_genre"
+                    style="@style/MovieLabel"/>
+            <TextView
+                    android:id="@+id/txtGenre"
+                    style="@style/MovieInfo"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+            <TextView
+                    android:text="@string/movie_runtime"
+                    style="@style/MovieLabel"/>
+            <TextView
+                    android:id="@+id/txtRuntime"
+                    style="@style/MovieInfo"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+            <TextView
+                    android:text="@string/movie_director"
+                    style="@style/MovieLabel"/>
+            <TextView
+                    android:id="@+id/txtDirector"
+                    style="@style/MovieInfo"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+            <TextView
+                    android:text="@string/movie_writer"
+                    style="@style/MovieLabel"/>
+            <TextView
+                    android:id="@+id/txtWriter"
+                    style="@style/MovieInfo"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+            <TextView
+                    android:text="@string/movie_plot"
+                    style="@style/MovieLabel"/>
+            <TextView
+                    android:id="@+id/txtPlot"
+                    style="@style/MovieInfo"/>
+        </LinearLayout>
+
+        <ImageView
+                android:id="@+id/imgPoster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

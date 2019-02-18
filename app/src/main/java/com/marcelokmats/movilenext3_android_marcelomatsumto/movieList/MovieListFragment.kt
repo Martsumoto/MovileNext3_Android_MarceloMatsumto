@@ -1,6 +1,7 @@
 package com.marcelokmats.movilenext3_android_marcelomatsumto.movieList
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.marcelokmats.movilenext3_android_marcelomatsumto.MovieViewModel
 import com.marcelokmats.movilenext3_android_marcelomatsumto.R
 import com.marcelokmats.movilenext3_android_marcelomatsumto.api.Movie
+import com.marcelokmats.movilenext3_android_marcelomatsumto.movieDetail.MovieDetailActivity
 import kotlinx.android.synthetic.main.fragment_movie_list.*
 import org.jetbrains.anko.longToast
 
@@ -23,6 +25,8 @@ import org.jetbrains.anko.longToast
 class MovieListFragment : Fragment() {
 
     companion object {
+        const val MOVIE_DETAIL = "MOVIE_DETAIL"
+        const val MOVIE_DETAIL_RESULT = 1
         fun newInstance(): MovieListFragment {
             return MovieListFragment()
         }
@@ -68,6 +72,8 @@ class MovieListFragment : Fragment() {
                 movies,
                 this.context!!, {
                     this.context?.longToast("${it.Title} ...")
+                    startMovieDetailActivity(it)
+
                 }, { movie: Movie, isActive: Boolean ->
                     if (isActive) {
                         mMovieViewModel.insertFavorite(movie)
@@ -81,4 +87,12 @@ class MovieListFragment : Fragment() {
         val layoutManager = LinearLayoutManager(this.context)
         recyclerView.layoutManager = layoutManager
     }
+
+    private fun startMovieDetailActivity(movie: Movie) {
+        val intent = Intent(this.activity, MovieDetailActivity::class.java)
+
+        intent.putExtra(MOVIE_DETAIL, movie)
+        startActivityForResult(intent, MOVIE_DETAIL_RESULT)
+    }
+
 }
