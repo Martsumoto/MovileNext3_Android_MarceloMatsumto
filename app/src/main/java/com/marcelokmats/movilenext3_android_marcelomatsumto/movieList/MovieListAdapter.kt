@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.marcelokmats.movilenext3_android_marcelomatsumto.R
 import com.marcelokmats.movilenext3_android_marcelomatsumto.api.Movie
+import com.marcelokmats.movilenext3_android_marcelomatsumto.util.ImageUtil
 import kotlinx.android.synthetic.main.fragment_movielist_item.view.*
 
 /**
@@ -18,7 +18,8 @@ import kotlinx.android.synthetic.main.fragment_movielist_item.view.*
 class MovieListAdapter(
     private val mValues: List<Movie>,
     private val mContext: Context,
-    private val mListener: (Movie) -> Unit
+    private val mListener: (Movie) -> Unit,
+    private val mFavoriteListener: (Movie, Boolean) -> Unit
 ) : RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,7 +31,7 @@ class MovieListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.bindView(item, mListener)
+        holder.bindView(item, mListener, mFavoriteListener)
     }
 
     override fun getItemCount(): Int = mValues.size
@@ -39,13 +40,13 @@ class MovieListAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(
             item: Movie,
-            listener: (Movie) -> Unit) = with(itemView) {
-            Glide.with(mContext)
-                .load(item.Poster)
-                .into(ivMovieCover)
+            listener: (Movie) -> Unit,
+            favoriteListener: (Movie, Boolean) -> Unit) = with(itemView) {
+            ImageUtil.loadImage(mContext, item.Poster?:"", ivMovieCover)
 
             tvTitle.text = item.Title ?: ""
             tvYear.text = item.Year ?: ""
+            icFavorite.setOnFavoriteStateChangedListener{ favoriteListener(item, icFavorite.isActive) }
 
             setOnClickListener { listener(item) }
         }

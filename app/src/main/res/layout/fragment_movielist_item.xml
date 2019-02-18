@@ -23,15 +23,24 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
+
+
         <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/ListItemTitle"
                 app:layout_constraintHeight_percent="0.25"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintRight_toRightOf="@id/icFavorite"
                 app:layout_constraintLeft_toRightOf="@id/ivMovieCover"
                 app:layout_constraintTop_toTopOf="parent"/>
+        <com.marcelokmats.movilenext3_android_marcelomatsumto.component.FavoriteIcon
+                android:id="@+id/icFavorite"
+                style="@style/FavoriteIcon"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvTitle"
+                app:layout_constraintBottom_toBottomOf="@id/tvTitle"/>
+
         <TextView
                 android:id="@+id/tvYear"
                 android:layout_width="0dp"

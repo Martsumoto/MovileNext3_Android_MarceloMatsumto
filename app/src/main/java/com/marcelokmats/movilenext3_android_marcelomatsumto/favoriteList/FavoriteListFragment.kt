@@ -1,4 +1,4 @@
-package com.marcelokmats.movilenext3_android_marcelomatsumto.movieList
+package com.marcelokmats.movilenext3_android_marcelomatsumto.favoriteList
 
 import android.content.Context
 import android.os.Bundle
@@ -12,19 +12,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.marcelokmats.movilenext3_android_marcelomatsumto.MovieViewModel
 import com.marcelokmats.movilenext3_android_marcelomatsumto.R
 import com.marcelokmats.movilenext3_android_marcelomatsumto.api.Movie
+import com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.MovieListAdapter
 import kotlinx.android.synthetic.main.fragment_movie_list.*
 import org.jetbrains.anko.longToast
 
 /**
  * A fragment representing a list of Items.
  * Activities containing this fragment MUST implement the
- * [MovieListFragment.OnListFragmentInteractionListener] interface.
+ * [FavoriteListFragment.OnListFragmentInteractionListener] interface.
  */
-class MovieListFragment : Fragment() {
+class FavoriteListFragment : Fragment() {
 
     companion object {
-        fun newInstance(): MovieListFragment {
-            return MovieListFragment()
+        fun newInstance(): FavoriteListFragment {
+            return FavoriteListFragment()
         }
     }
 
@@ -44,8 +45,6 @@ class MovieListFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
 
-        mMovieViewModel.setSearchTextView("lake")
-
         return view
     }
 
@@ -59,7 +58,7 @@ class MovieListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        mMovieViewModel.movieSearchResultLive.observe(this, Observer { loadMovieList(it?.movies) } )
+        mMovieViewModel.favoriteListLive.observe(this, Observer { loadMovieList(it) } )
     }
 
     private fun loadMovieList(movies: List<Movie>?) {
@@ -69,11 +68,6 @@ class MovieListFragment : Fragment() {
                 this.context!!, {
                     this.context?.longToast("${it.Title} ...")
                 }, { movie: Movie, isActive: Boolean ->
-                    if (isActive) {
-                        mMovieViewModel.insertFavorite(movie)
-                    } else {
-                        mMovieViewModel.removeFavorite(movie)
-                    }
                 }
             )
         }
