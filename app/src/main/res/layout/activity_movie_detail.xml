@@ -13,76 +13,102 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
-    <LinearLayout
+    <TextView
+            android:id="@+id/tvErrorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/error_load_movie_detail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutContent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="invisible"
-            android:orientation="vertical">
+            android:visibility="invisible">
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="wrap_content">
-            <TextView
-                    android:text="@string/movie_year"
-                    style="@style/MovieLabel"/>
-            <TextView
-                    android:id="@+id/txtYear"
-                    style="@style/MovieInfo"/>
-        </LinearLayout>
+        <ImageView
+                android:id="@+id/ivPoster"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHeight_percent="0.4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"/>
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="wrap_content">
+        <LinearLayout
+                android:id="@+id/ll1"
+                app:layout_constraintTop_toBottomOf="@id/ivPoster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <TextView
                     android:text="@string/movie_genre"
                     style="@style/MovieLabel"/>
             <TextView
-                    android:id="@+id/txtGenre"
+                    android:id="@+id/tvGenre"
                     style="@style/MovieInfo"/>
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="wrap_content">
+        <LinearLayout
+                android:id="@+id/ll2"
+                app:layout_constraintTop_toBottomOf="@id/ll1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <TextView
                     android:text="@string/movie_runtime"
                     style="@style/MovieLabel"/>
             <TextView
-                    android:id="@+id/txtRuntime"
+                    android:id="@+id/tvRuntime"
                     style="@style/MovieInfo"/>
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="wrap_content">
+        <LinearLayout
+                android:id="@+id/ll3"
+                app:layout_constraintTop_toBottomOf="@id/ll2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <TextView
                     android:text="@string/movie_director"
                     style="@style/MovieLabel"/>
             <TextView
-                    android:id="@+id/txtDirector"
+                    android:id="@+id/tvDirector"
                     style="@style/MovieInfo"/>
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="wrap_content">
+        <LinearLayout
+                android:id="@+id/ll4"
+                app:layout_constraintTop_toBottomOf="@id/ll3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <TextView
                     android:text="@string/movie_writer"
                     style="@style/MovieLabel"/>
             <TextView
-                    android:id="@+id/txtWriter"
+                    android:id="@+id/tvWriter"
                     style="@style/MovieInfo"/>
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="wrap_content">
+        <LinearLayout
+                android:id="@+id/ll5"
+                app:layout_constraintTop_toBottomOf="@id/ll4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <TextView
                     android:text="@string/movie_plot"
                     style="@style/MovieLabel"/>
             <TextView
-                    android:id="@+id/txtPlot"
+                    android:id="@+id/tvPlot"
                     style="@style/MovieInfo"/>
         </LinearLayout>
 
-        <ImageView
-                android:id="@+id/imgPoster"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-    </LinearLayout>
+
+        <include
+                layout="@layout/number_picker"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintWidth_percent="0.4"
+                app:layout_constraintTop_toBottomOf="@id/ll5"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

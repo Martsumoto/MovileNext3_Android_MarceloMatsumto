@@ -12,4 +12,5 @@
     <string name="movie_plot">Plot:</string>
     <string name="error_api_connection_error">Connection error</string>
     <string name="error_api_no_result">No movie found</string>
+    <string name="error_load_movie_detail">Could not load movie detail</string>
 </resources>

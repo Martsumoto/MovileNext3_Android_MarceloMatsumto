@@ -26,6 +26,7 @@ class MovieListFragment : Fragment() {
 
     companion object {
         const val MOVIE_DETAIL = "MOVIE_DETAIL"
+        const val MOVIE_TITLE = "MOVIE_TITLE"
         const val MOVIE_DETAIL_RESULT = 1
         fun newInstance(): MovieListFragment {
             return MovieListFragment()
@@ -92,6 +93,7 @@ class MovieListFragment : Fragment() {
         val intent = Intent(this.activity, MovieDetailActivity::class.java)
 
         intent.putExtra(MOVIE_DETAIL, movie)
+        intent.putExtra(MOVIE_TITLE, movie.Title)
         startActivityForResult(intent, MOVIE_DETAIL_RESULT)
     }
 

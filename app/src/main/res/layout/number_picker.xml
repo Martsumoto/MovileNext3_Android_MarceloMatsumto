@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:orientation="horizontal">
+
+    <Button
+            android:id="@+id/minus"
+            android:layout_width="@dimen/number_picker_button_width"
+            android:layout_height="@dimen/number_picker_button_height"
+            android:layout_gravity="center_vertical|end"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimaryDark"
+            android:text="-" tools:ignore="HardcodedText"/>
+
+    <EditText
+            android:id="@+id/edtAmount"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:inputType="number"/>
+
+    <Button
+            android:id="@+id/plus"
+            android:layout_width="@dimen/number_picker_button_width"
+            android:layout_height="@dimen/number_picker_button_height"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center_vertical|start"
+            android:background="@color/colorPrimaryDark"
+            android:text="+" tools:ignore="HardcodedText"/>
+</LinearLayout>
