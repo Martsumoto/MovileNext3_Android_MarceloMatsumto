@@ -15,8 +15,8 @@
             android:background="@color/colorPrimaryDark"
             android:text="-" tools:ignore="HardcodedText"/>
 
-    <EditText
-            android:id="@+id/edtAmount"
+    <TextView
+            android:id="@+id/tvAmount"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="0dp"
