@@ -73,12 +73,43 @@ data class MovieTicket(
     val Title: String?,
     val Year: String?,
     val Poster: String?,
-    var amount: Int) {
+    var amount: Int) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readInt()
+    ) {
+    }
+
     constructor(movie: Movie, amount: Int) : this(
         movie.imdbID,
         movie.Title,
         movie.Year,
         movie.Poster,
         amount) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(imdbID)
+        parcel.writeString(Title)
+        parcel.writeString(Year)
+        parcel.writeString(Poster)
+        parcel.writeInt(amount)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<MovieTicket> {
+        override fun createFromParcel(parcel: Parcel): MovieTicket {
+            return MovieTicket(parcel)
+        }
+
+        override fun newArray(size: Int): Array<MovieTicket?> {
+            return arrayOfNulls(size)
+        }
     }
 }

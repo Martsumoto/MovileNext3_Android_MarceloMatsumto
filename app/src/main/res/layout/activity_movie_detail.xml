@@ -102,9 +102,8 @@
         </LinearLayout>
 
 
-        <include
-                android:id="@+id/numberPicker"
-                layout="@layout/number_picker"
+        <com.marcelokmats.movilenext3_android_marcelomatsumto.component.AmountSelector
+                android:id="@+id/amountSelector"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -117,7 +116,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/numberPicker"
+                app:layout_constraintTop_toBottomOf="@id/amountSelector"
                 android:background="@color/colorPrimaryDark"
                 android:textColor="@android:color/white"
                 android:text="@string/confirm_ticket_amount"

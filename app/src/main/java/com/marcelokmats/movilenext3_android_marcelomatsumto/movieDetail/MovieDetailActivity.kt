@@ -12,12 +12,11 @@ import com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.MovieList
 import com.marcelokmats.movilenext3_android_marcelomatsumto.util.ImageUtil
 import com.marcelokmats.movilenext3_android_marcelomatsumto.util.ViewUtil
 import kotlinx.android.synthetic.main.activity_movie_detail.*
-import kotlinx.android.synthetic.main.number_picker.*
 
 class MovieDetailActivity : AppCompatActivity() {
 
     companion object {
-        const val TICKET_AMOUNT = "TICKET_AMOUNT"
+        const val TICKET = "TICKET_AMOUNT"
     }
 
     private lateinit var mMovieDetailViewModel: MovieDetailViewModel
@@ -36,6 +35,9 @@ class MovieDetailActivity : AppCompatActivity() {
         mMovieDetailViewModel.setMovie(intent.getParcelableExtra(MovieList.MOVIE_DETAIL))
         mMovieDetailViewModel.movieDetailsLive.observe(this, Observer {
             fillMovieDetails(it)
+        })
+        mMovieDetailViewModel.movieTicketLive.observe(this, Observer {
+            amountSelector.setAmount(it?.amount ?: 0)
         })
 
         btConfirm.setOnClickListener { confirmTickets() }
@@ -58,11 +60,11 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun confirmTickets() {
-        val ticketAmount = edtAmount.text.toString().toIntOrNull() ?: 0
+        val ticketAmount = amountSelector.getAmount()
         mMovieDetailViewModel.updateTicket(ticketAmount)
 
         intent = Intent()
-        intent.putExtra(TICKET_AMOUNT, ticketAmount)
+        intent.putExtra(TICKET, mMovieDetailViewModel.ticket)
         setResult(Activity.RESULT_OK, intent)
         finish()
     }

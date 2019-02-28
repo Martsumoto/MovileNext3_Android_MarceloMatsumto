@@ -2,6 +2,7 @@ package com.marcelokmats.movilenext3_android_marcelomatsumto.repository
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.marcelokmats.movilenext3_android_marcelomatsumto.api.Movie
 import com.marcelokmats.movilenext3_android_marcelomatsumto.api.MovieTicket
 import com.marcelokmats.movilenext3_android_marcelomatsumto.dao.MovieDao
@@ -43,5 +44,15 @@ class MovieRepository(application: Application) {
         doAsync {
             movieDao.removeMovieTicket(imdbID)
         }
+    }
+
+    fun getTicketFromId(imdbID: String) : LiveData<MovieTicket> {
+        val movieTicket : MutableLiveData<MovieTicket> = MutableLiveData()
+
+        doAsync {
+            movieTicket.postValue(movieDao.getMovieTicketFromId(imdbID))
+        }
+
+        return movieTicket
     }
 }

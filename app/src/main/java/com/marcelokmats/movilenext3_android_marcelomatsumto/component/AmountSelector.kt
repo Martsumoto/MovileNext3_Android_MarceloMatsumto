@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.annotation.Nullable
 import com.marcelokmats.movilenext3_android_marcelomatsumto.R
 
-class AmountLayout : LinearLayout {
+class AmountSelector : LinearLayout {
 
     companion object {
         const val MAX_VALUE = 100;
@@ -38,16 +38,17 @@ class AmountLayout : LinearLayout {
     }
 
     private fun init(context: Context) {
-        inflate(context, R.layout.number_picker, this)
+        inflate(context, R.layout.amount_selector, this)
         btPlus = findViewById(R.id.plus)
         btMinus = findViewById(R.id.minus)
+        tvAmount = findViewById(R.id.tvAmount)
 
         btPlus.setOnClickListener { changeAmount(1) }
         btMinus.setOnClickListener { changeAmount(-1) }
     }
 
     private fun changeAmount(factor: Int) {
-        var amount = getCurrentAmount()
+        var amount = getAmount()
         amount += factor
         amount = when {
             amount < 0 -> 0
@@ -57,9 +58,9 @@ class AmountLayout : LinearLayout {
         setAmount(amount)
     }
 
-    private fun getCurrentAmount() = tvAmount.text.toString().toIntOrNull() ?: 0
+    fun getAmount() = tvAmount.text.toString().toIntOrNull() ?: 0
 
-    private fun setAmount(amount: Int) {
+    fun setAmount(amount: Int) {
         tvAmount.text = amount.toString()
     }
 }

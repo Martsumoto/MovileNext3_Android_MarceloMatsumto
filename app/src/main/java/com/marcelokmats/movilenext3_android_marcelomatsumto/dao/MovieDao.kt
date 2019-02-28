@@ -28,4 +28,7 @@ interface MovieDao {
 
     @Query("SELECT * FROM ${Tables.MOVIE_TICKETS}")
     fun getMovieTickets(): LiveData<List<MovieTicket>>
+
+    @Query("SELECT * FROM ${Tables.MOVIE_TICKETS} WHERE imdbID = :imdbID")
+    fun getMovieTicketFromId(imdbID: String): MovieTicket
 }

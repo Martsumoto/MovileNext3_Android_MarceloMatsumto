@@ -45,6 +45,9 @@ abstract class MovieList : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == MOVIE_DETAIL_RESULT) {
+            data?.let {
+                mMovieViewModel.updateMovieTicket(data.getParcelableExtra(MovieDetailActivity.TICKET))
+            }
 
         }
     }
