@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">MovileNext3_Android_MarceloMatsumto</string>
     <string name="action_settings">Settings</string>
-    <string name="bottom_navigation_movies">Filmes</string>
-    <string name="bottom_navigation_favorites">Favoritos</string>
+    <string name="bottom_navigation_movies">Movies</string>
+    <string name="bottom_navigation_favorites">Favorites</string>
+    <string name="bottom_navigation_tickets">Tickets</string>
 
     <string name="movie_year">Year:</string>
     <string name="movie_genre">Genre:</string>
@@ -13,4 +14,6 @@
     <string name="error_api_connection_error">Connection error</string>
     <string name="error_api_no_result">No movie found</string>
     <string name="error_load_movie_detail">Could not load movie detail</string>
+    <string name="confirm_ticket_amount">Confirm ticket amount</string>
+    <string name="tickets">Tickets</string>
 </resources>

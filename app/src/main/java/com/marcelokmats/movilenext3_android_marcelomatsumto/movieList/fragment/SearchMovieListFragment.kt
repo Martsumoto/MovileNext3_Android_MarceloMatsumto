@@ -1,6 +1,7 @@
-package com.marcelokmats.movilenext3_android_marcelomatsumto.movieList
+package com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.fragment
 
 import androidx.lifecycle.Observer
+import com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.MovieList
 
 /**
  * A fragment representing a list of Items.

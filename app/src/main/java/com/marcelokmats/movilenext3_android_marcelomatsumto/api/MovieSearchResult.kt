@@ -24,7 +24,7 @@ data class Movie(
     var isFavorite: Boolean = true
 
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
+        parcel.readString()?:"",
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
@@ -66,11 +66,19 @@ data class MovieDetail(
     var Writer: String?,
     var Genre: String?)
 
-@Entity
+@Entity(tableName = Tables.MOVIE_TICKETS)
 data class MovieTicket(
     @PrimaryKey
-    val imdbId: String,
+    val imdbID: String,
     val Title: String?,
     val Year: String?,
     val Poster: String?,
-    val amount: Int)
+    var amount: Int) {
+    constructor(movie: Movie, amount: Int) : this(
+        movie.imdbID,
+        movie.Title,
+        movie.Year,
+        movie.Poster,
+        amount) {
+    }
+}

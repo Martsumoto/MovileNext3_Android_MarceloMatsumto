@@ -8,4 +8,8 @@
             android:id="@+id/action_favorites"
             android:icon="@drawable/ic_heart_empty"
             android:title="@string/bottom_navigation_favorites"/>
+    <item
+            android:id="@+id/action_tickets"
+            android:icon="@drawable/ic_ticket"
+            android:title="@string/bottom_navigation_tickets"/>
 </menu>

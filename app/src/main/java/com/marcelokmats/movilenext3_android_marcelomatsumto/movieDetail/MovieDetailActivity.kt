@@ -1,5 +1,7 @@
 package com.marcelokmats.movilenext3_android_marcelomatsumto.movieDetail
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -10,8 +12,13 @@ import com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.MovieList
 import com.marcelokmats.movilenext3_android_marcelomatsumto.util.ImageUtil
 import com.marcelokmats.movilenext3_android_marcelomatsumto.util.ViewUtil
 import kotlinx.android.synthetic.main.activity_movie_detail.*
+import kotlinx.android.synthetic.main.number_picker.*
 
 class MovieDetailActivity : AppCompatActivity() {
+
+    companion object {
+        const val TICKET_AMOUNT = "TICKET_AMOUNT"
+    }
 
     private lateinit var mMovieDetailViewModel: MovieDetailViewModel
 
@@ -26,10 +33,12 @@ class MovieDetailActivity : AppCompatActivity() {
 
         changeViewType(ViewUtil.Type.PROGRESSBAR)
         supportActionBar?.title = intent.getStringExtra(MovieList.MOVIE_TITLE)
-        mMovieDetailViewModel.movieBaseInfoLive.value = intent.getParcelableExtra(MovieList.MOVIE_DETAIL)
+        mMovieDetailViewModel.setMovie(intent.getParcelableExtra(MovieList.MOVIE_DETAIL))
         mMovieDetailViewModel.movieDetailsLive.observe(this, Observer {
             fillMovieDetails(it)
         })
+
+        btConfirm.setOnClickListener { confirmTickets() }
     }
 
     private fun fillMovieDetails(movieDetail: MovieDetail) {
@@ -46,5 +55,15 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private fun changeViewType(type : ViewUtil.Type) {
         ViewUtil.changeViewMode(layoutContent, progressBar, tvErrorMessage, type);
+    }
+
+    private fun confirmTickets() {
+        val ticketAmount = edtAmount.text.toString().toIntOrNull() ?: 0
+        mMovieDetailViewModel.updateTicket(ticketAmount)
+
+        intent = Intent()
+        intent.putExtra(TICKET_AMOUNT, ticketAmount)
+        setResult(Activity.RESULT_OK, intent)
+        finish()
     }
 }

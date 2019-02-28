@@ -6,22 +6,25 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.marcelokmats.movilenext3_android_marcelomatsumto.MovieViewModel
 import com.marcelokmats.movilenext3_android_marcelomatsumto.R
+import com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.fragment.FavoriteMovieListFragment
+import com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.fragment.MovieTicketsListFragment
+import com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.fragment.SearchMovieListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MovieListActivity : AppCompatActivity() {
 
 
-    private lateinit var mMovieViewModel: MovieViewModel
+    private lateinit var mMovieViewModel: MovieListViewModel
     private val movieListFragment by lazy { SearchMovieListFragment.newInstance() }
     private val favoriteListFragment by lazy { FavoriteMovieListFragment.newInstance() }
+    private val ticketsListFragment by lazy { MovieTicketsListFragment.newInstance() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mMovieViewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
+        mMovieViewModel = ViewModelProviders.of(this).get(MovieListViewModel::class.java)
         replaceFragment(SearchMovieListFragment.newInstance())
         this.setupBottomNavigation()
     }
@@ -54,6 +57,9 @@ class MovieListActivity : AppCompatActivity() {
                 }
                 R.id.action_favorites -> {
                     replaceFragment(favoriteListFragment)
+                }
+                R.id.action_tickets -> {
+                    replaceFragment(ticketsListFragment)
                 }
             }
             return@setOnNavigationItemSelectedListener true
