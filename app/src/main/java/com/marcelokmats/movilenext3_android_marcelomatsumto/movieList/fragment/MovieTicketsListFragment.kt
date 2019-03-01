@@ -4,7 +4,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.marcelokmats.movilenext3_android_marcelomatsumto.api.MovieTicket
 import com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.MovieList
-import com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.MovieTicketListAdapter
+import com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.adapter.MovieTicketListAdapter
 import kotlinx.android.synthetic.main.fragment_movie_list.*
 
 /**
@@ -27,9 +27,11 @@ class MovieTicketsListFragment : MovieList() {
 
     protected fun loadTicketsList(movies: List<MovieTicket>?) {
         movies?.let { movies ->
-            recyclerView.adapter = MovieTicketListAdapter(
-                movies, this.context!!, movieTicketClickListener()
-            )
+            recyclerView.adapter =
+                MovieTicketListAdapter(movies,
+                    this.context!!,
+                    movieTicketClickListener(),
+                    mMovieViewModel)
         }
 
         val layoutManager = LinearLayoutManager(this.context)

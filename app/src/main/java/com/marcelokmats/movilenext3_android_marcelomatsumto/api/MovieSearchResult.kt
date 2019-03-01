@@ -3,7 +3,6 @@ package com.marcelokmats.movilenext3_android_marcelomatsumto.api
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import com.marcelokmats.movilenext3_android_marcelomatsumto.db.Tables
@@ -20,16 +19,12 @@ data class Movie(
     val Title: String?,
     val Year: String?,
     val Poster: String?) :Parcelable {
-    @Ignore
-    var isFavorite: Boolean = true
-
     constructor(parcel: Parcel) : this(
-        parcel.readString()?:"",
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
     ) {
-        isFavorite = parcel.readByte() != 0.toByte()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -37,7 +32,6 @@ data class Movie(
         parcel.writeString(Title)
         parcel.writeString(Year)
         parcel.writeString(Poster)
-        parcel.writeByte(if (isFavorite) 1 else 0)
     }
 
     override fun describeContents(): Int {

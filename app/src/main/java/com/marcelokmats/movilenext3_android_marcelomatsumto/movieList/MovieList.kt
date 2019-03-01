@@ -12,6 +12,7 @@ import com.marcelokmats.movilenext3_android_marcelomatsumto.R
 import com.marcelokmats.movilenext3_android_marcelomatsumto.api.Movie
 import com.marcelokmats.movilenext3_android_marcelomatsumto.api.MovieTicket
 import com.marcelokmats.movilenext3_android_marcelomatsumto.movieDetail.MovieDetailActivity
+import com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.adapter.MovieListAdapter
 import kotlinx.android.synthetic.main.fragment_movie_list.*
 import org.jetbrains.anko.longToast
 
@@ -54,16 +55,19 @@ abstract class MovieList : Fragment() {
 
     protected fun loadMovieList(movies: List<Movie>?) {
         movies?.let { movies ->
-            recyclerView.adapter = MovieListAdapter(
-                movies, this.context!!, movieClickListener(), favoriteClickListener()
-            )
+            recyclerView.adapter =
+                MovieListAdapter(movies,
+                    this.context!!,
+                    movieClickListener(),
+                    favoriteClickListener(),
+                    mMovieViewModel)
         }
 
         val layoutManager = LinearLayoutManager(this.context)
         recyclerView.layoutManager = layoutManager
     }
 
-    protected fun movieClickListener(): (Movie) -> Unit {
+    private fun movieClickListener(): (Movie) -> Unit {
         return {
             this.context?.longToast("${it.Title} ...")
             startMovieDetailActivity(it)
@@ -78,7 +82,7 @@ abstract class MovieList : Fragment() {
         }
     }
 
-    protected fun favoriteClickListener(): (Movie, Boolean) -> Unit {
+    private fun favoriteClickListener(): (Movie, Boolean) -> Unit {
         return { movie, isActive ->
             if (isActive) {
                 mMovieViewModel.insertFavorite(movie)
