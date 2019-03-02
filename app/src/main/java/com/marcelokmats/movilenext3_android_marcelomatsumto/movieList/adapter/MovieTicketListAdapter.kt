@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.marcelokmats.movilenext3_android_marcelomatsumto.R
 import com.marcelokmats.movilenext3_android_marcelomatsumto.api.MovieTicket
-import com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.MovieListViewModel
 import com.marcelokmats.movilenext3_android_marcelomatsumto.util.ImageUtil
 import kotlinx.android.synthetic.main.fragment_movieticket_item.view.*
 
@@ -19,8 +18,7 @@ import kotlinx.android.synthetic.main.fragment_movieticket_item.view.*
 class MovieTicketListAdapter(
     private val mValues: List<MovieTicket>,
     private val mContext: Context,
-    private val mListener: (MovieTicket) -> Unit,
-    movieListViewModel: MovieListViewModel
+    private val mListener: (MovieTicket) -> Unit
 ) : RecyclerView.Adapter<MovieTicketListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

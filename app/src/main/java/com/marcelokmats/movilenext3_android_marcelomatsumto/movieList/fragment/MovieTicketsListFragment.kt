@@ -30,8 +30,7 @@ class MovieTicketsListFragment : MovieList() {
             recyclerView.adapter =
                 MovieTicketListAdapter(movies,
                     this.context!!,
-                    movieTicketClickListener(),
-                    mMovieViewModel)
+                    movieTicketClickListener())
         }
 
         val layoutManager = LinearLayoutManager(this.context)

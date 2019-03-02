@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 style="@style/ListItemTitle"
                 app:layout_constraintHeight_percent="0.25"
-                app:layout_constraintRight_toRightOf="@id/icFavorite"
+                app:layout_constraintRight_toLeftOf="@id/icFavorite"
                 app:layout_constraintLeft_toRightOf="@id/ivMovieCover"
                 app:layout_constraintTop_toTopOf="parent"/>
         <com.marcelokmats.movilenext3_android_marcelomatsumto.component.FavoriteIcon
