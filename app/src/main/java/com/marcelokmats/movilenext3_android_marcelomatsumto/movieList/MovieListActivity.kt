@@ -3,6 +3,7 @@ package com.marcelokmats.movilenext3_android_marcelomatsumto.movieList
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -41,8 +42,7 @@ class MovieListActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun replaceFragment(fragment : Fragment) {
+    internal fun replaceFragment(fragment : Fragment) {
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.frameLayout, fragment, fragment.javaClass.simpleName)

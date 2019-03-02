@@ -2,6 +2,7 @@ package com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.fragment
 
 import androidx.lifecycle.Observer
 import com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.MovieList
+import com.marcelokmats.movilenext3_android_marcelomatsumto.util.ViewUtil
 
 /**
  * A fragment representing a list of Items.
@@ -18,6 +19,7 @@ class FavoriteMovieListFragment : MovieList() {
 
     override fun onResume() {
         super.onResume()
+        changeViewType(ViewUtil.Type.PROGRESSBAR)
         mMovieViewModel.favoriteListLive.observe(this, Observer { loadMovieList(it) } )
     }
 }

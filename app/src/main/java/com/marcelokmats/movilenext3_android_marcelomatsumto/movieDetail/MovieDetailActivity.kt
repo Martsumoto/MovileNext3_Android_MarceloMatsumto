@@ -56,7 +56,7 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun changeViewType(type : ViewUtil.Type) {
-        ViewUtil.changeViewMode(layoutContent, progressBar, tvErrorMessage, type);
+        ViewUtil.changeViewMode(layoutContent, progressBar, tvErrorMessage, type)
     }
 
     private fun confirmTickets() {

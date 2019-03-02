@@ -13,6 +13,7 @@ import com.marcelokmats.movilenext3_android_marcelomatsumto.api.Movie
 import com.marcelokmats.movilenext3_android_marcelomatsumto.api.MovieTicket
 import com.marcelokmats.movilenext3_android_marcelomatsumto.movieDetail.MovieDetailActivity
 import com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.adapter.MovieListAdapter
+import com.marcelokmats.movilenext3_android_marcelomatsumto.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_movie_list.*
 import org.jetbrains.anko.longToast
 
@@ -61,6 +62,10 @@ abstract class MovieList : Fragment() {
                     movieClickListener(),
                     favoriteClickListener(),
                     mMovieViewModel)
+
+            changeViewType(ViewUtil.Type.CONTENT)
+        } ?: run {
+            changeViewType(ViewUtil.Type.ERROR)
         }
 
         val layoutManager = LinearLayoutManager(this.context)
@@ -90,6 +95,10 @@ abstract class MovieList : Fragment() {
                 mMovieViewModel.removeFavorite(movie)
             }
         }
+    }
+
+    protected fun changeViewType(type : ViewUtil.Type) {
+        ViewUtil.changeViewMode(recyclerView, progressBar, tvErrorMessage, type)
     }
 
 }

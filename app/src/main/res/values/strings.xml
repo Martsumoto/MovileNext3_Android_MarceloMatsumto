@@ -14,6 +14,8 @@
     <string name="error_api_connection_error">Connection error</string>
     <string name="error_api_no_result">No movie found</string>
     <string name="error_load_movie_detail">Could not load movie detail</string>
+    <string name="error_load_movie_list">Could not load movie list</string>
     <string name="confirm_ticket_amount">Confirm ticket amount</string>
     <string name="tickets">Tickets</string>
+    <string name="search_text_too_short">Type at least the 3 characters</string>
 </resources>

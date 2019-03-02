@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.marcelokmats.movilenext3_android_marcelomatsumto.api.MovieTicket
 import com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.MovieList
 import com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.adapter.MovieTicketListAdapter
+import com.marcelokmats.movilenext3_android_marcelomatsumto.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_movie_list.*
 
 /**
@@ -22,6 +23,7 @@ class MovieTicketsListFragment : MovieList() {
 
     override fun onResume() {
         super.onResume()
+        changeViewType(ViewUtil.Type.PROGRESSBAR)
         mMovieViewModel.movieTicketListLive.observe(this, Observer { loadTicketsList(it) } )
     }
 
@@ -31,6 +33,9 @@ class MovieTicketsListFragment : MovieList() {
                 MovieTicketListAdapter(movies,
                     this.context!!,
                     movieTicketClickListener())
+            changeViewType(ViewUtil.Type.CONTENT)
+        } ?: run {
+            changeViewType(ViewUtil.Type.ERROR)
         }
 
         val layoutManager = LinearLayoutManager(this.context)

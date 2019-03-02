@@ -3,7 +3,9 @@ package com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.fragment
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.Observer
+import com.marcelokmats.movilenext3_android_marcelomatsumto.R
 import com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.MovieList
+import com.marcelokmats.movilenext3_android_marcelomatsumto.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_movie_list.*
 import org.jetbrains.anko.longToast
 
@@ -32,9 +34,10 @@ class SearchMovieListFragment : MovieList() {
         etSearch.setOnEditorActionListener() { textView, actionId, keyEvent ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 if (etSearch.text.toString().length < 3) {
-                    activity?.longToast("Type at least the 3 characters")
+                    activity?.longToast(getString(R.string.search_text_too_short))
                 } else {
                     mMovieViewModel.setSearchTextView(etSearch.text.toString())
+                    changeViewType(ViewUtil.Type.PROGRESSBAR)
                 }
                 true
             } else {
