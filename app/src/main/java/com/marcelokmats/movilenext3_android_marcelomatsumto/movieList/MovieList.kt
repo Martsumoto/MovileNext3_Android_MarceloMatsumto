@@ -15,7 +15,6 @@ import com.marcelokmats.movilenext3_android_marcelomatsumto.movieDetail.MovieDet
 import com.marcelokmats.movilenext3_android_marcelomatsumto.movieList.adapter.MovieListAdapter
 import com.marcelokmats.movilenext3_android_marcelomatsumto.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_movie_list.*
-import org.jetbrains.anko.longToast
 
 abstract class MovieList : Fragment() {
 
@@ -74,7 +73,6 @@ abstract class MovieList : Fragment() {
 
     private fun movieClickListener(): (Movie) -> Unit {
         return {
-            this.context?.longToast("${it.Title} ...")
             startMovieDetailActivity(it)
 
         }
@@ -82,7 +80,6 @@ abstract class MovieList : Fragment() {
 
     protected fun movieTicketClickListener(): (MovieTicket) -> Unit {
         return {
-            this.context?.longToast("${it.Title} ...")
             startMovieDetailActivity(mMovieViewModel.createMovieFromTicket(it))
         }
     }

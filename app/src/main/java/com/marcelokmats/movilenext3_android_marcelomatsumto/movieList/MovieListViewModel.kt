@@ -2,6 +2,9 @@ package com.marcelokmats.movilenext3_android_marcelomatsumto.movieList
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.marcelokmats.movilenext3_android_marcelomatsumto.DaggerMovieComponent
+import com.marcelokmats.movilenext3_android_marcelomatsumto.MovieRepositoryModule
+import com.marcelokmats.movilenext3_android_marcelomatsumto.MovieRetrieverModule
 import com.marcelokmats.movilenext3_android_marcelomatsumto.api.Movie
 import com.marcelokmats.movilenext3_android_marcelomatsumto.api.MovieRetriever
 import com.marcelokmats.movilenext3_android_marcelomatsumto.api.MovieSearchResult
@@ -11,7 +14,8 @@ import com.marcelokmats.movilenext3_android_marcelomatsumto.util.observeOnce
 
 class MovieListViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val movieRetriever = MovieRetriever()
+    private val movieRetriever : MovieRetriever
+    private val repository : MovieRepository
 
     val movieSearchResultLive : LiveData<MovieSearchResult>
     val searchTextList : MutableLiveData<String> = MutableLiveData()
@@ -19,11 +23,15 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     val favoriteMap : MutableMap<String, Movie> = HashMap()
     val movieTicketListLive : MutableLiveData<MutableList<MovieTicket>> = MutableLiveData()
 
-    //val moviesFavoritesPairLive : LiveData<Pair<MovieSearchResult, MutableList<Movie>>>
-
-    private val repository = MovieRepository(application)
-
     init {
+        val component = DaggerMovieComponent.builder()
+            .movieRepositoryModule(MovieRepositoryModule(application))
+            .movieRetrieverModule(MovieRetrieverModule())
+            .build()
+
+        movieRetriever = component.movieRetriever()
+        repository = component.movieRepository()
+
         repository.favoritedMovies.observeOnce(Observer { loadFavorites(it) })
         repository.movieTickets.observeOnce(Observer { movieTicketListLive.value = it.toMutableList() })
 
@@ -114,9 +122,5 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
         for (movie in favorites) {
             favoriteMap[movie.imdbID] = movie
         }
-    }
-
-    private fun loadMovieTckets(movieTickets: List<MovieTicket>) {
-
     }
 }
